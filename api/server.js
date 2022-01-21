@@ -13,7 +13,7 @@ server.use('/api/resources', ResourceRouter);
 server.use('/api/tasks', TaskRouter);
 
 server.use('*', (req, res) => {
-    res.status(404).json({ message: `${req.method} ${req.baseUrl} not found!` });
+    res.status(404).json({ message: `${req.method} ${req.baseUrl} not found` });
 });
 
 server.use((error, req, res, next) => {
