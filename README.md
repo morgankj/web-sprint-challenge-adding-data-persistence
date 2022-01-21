@@ -10,8 +10,8 @@ You are not allowed to collaborate during the sprint challenge.
 
 ## Project Set Up
 
-- [X] Run `npm install` to install your dependencies.
-- [X] Run tests locally executing `npm test`.
+- [x] Run `npm install` to install your dependencies.
+- [x] Run tests locally executing `npm test`.
 
 ## Project Instructions
 
@@ -41,52 +41,57 @@ The project needs some additional NPM dependencies in order to work.
 
 Build the migration(s) in Knex inside the `data/migrations` folder using appropriate data types and constraints. **You must use the table names and the column names described below.** To give a primary key a name different than `id`, do `table.increments("project_id")` instead of `table.increments()`.
 
-- [X] A **project** is what needs to be done and is stored in a `projects` table with the following columns:
+- [x] A **project** is what needs to be done and is stored in a `projects` table with the following columns:
 
-  - [X] `project_id` - primary key
-  - [X] `project_name` - required
-  - [X] `project_description` - optional
-  - [X] `project_completed` - the database defaults it to `false` (integer 0) if not provided
+  - [x] `project_id` - primary key
+  - [x] `project_name` - required
+  - [x] `project_description` - optional
+  - [x] `project_completed` - the database defaults it to `false` (integer 0) if not provided
 
-- [X] A **resource** is anything needed to complete a project and is stored in a `resources` table with the following columns:
+- [x] A **resource** is anything needed to complete a project and is stored in a `resources` table with the following columns:
 
-  - [X] `resource_id` - primary key
-  - [X] `resource_name` - required and unique
-  - [X] `resource_description` - optional
+  - [x] `resource_id` - primary key
+  - [x] `resource_name` - required and unique
+  - [x] `resource_description` - optional
 
-- [X] A **task** is one of the steps needed to complete a project and is stored in a `tasks` table with the following columns:
+- [x] A **task** is one of the steps needed to complete a project and is stored in a `tasks` table with the following columns:
 
-  - [X] `task_id` - primary key
-  - [X] `task_description` - required
-  - [X] `task_notes` - optional
-  - [X] `task_completed` - the database defaults it to `false` (integer 0) if not provided
-  - [X] `project_id` - required and points to an actual `project_id` in the `projects` table
+  - [x] `task_id` - primary key
+  - [x] `task_description` - required
+  - [x] `task_notes` - optional
+  - [x] `task_completed` - the database defaults it to `false` (integer 0) if not provided
+  - [x] `project_id` - required and points to an actual `project_id` in the `projects` table
 
-- [X] A **resource assignment** connects a resource and a project, and is stored in a `project_resources` table. You decide what columns to use.
+- [x] A **resource assignment** connects a resource and a project, and is stored in a `project_resources` table. You decide what columns to use.
 
 ### Required Endpoints
 
 Build an API inside the `api` folder with endpoints for:
 
-- [X] `[POST] /api/resources`
+- [x] `[POST] /api/resources`
+
   - Example of response body: `{"resource_id":1,"resource_name":"foo","resource_description":null}`
 
-- [X] `[GET] /api/resources`
+- [x] `[GET] /api/resources`
+
   - Example of response body: `[{"resource_id":1,"resource_name":"foo","resource_description":null}]`
 
-- [X] `[POST] /api/projects`
+- [x] `[POST] /api/projects`
+
   - Even though `project_completed` is stored as an integer, the API uses booleans when interacting with the client
   - Example of response body: `{"project_id":1,"project_name":"bar","project_description":null,"project_completed":false}`
 
-- [X] `[GET] /api/projects`
+- [x] `[GET] /api/projects`
+
   - Even though `project_completed` is stored as an integer, the API uses booleans when interacting with the client
   - Example of response body: `[{"project_id":1,"project_name":"bar","project_description":null,"project_completed":false}]`
 
-- [ ] `[POST] /api/tasks`
+- [x] `[POST] /api/tasks`
+
   - Even though `task_completed` is stored as an integer, the API uses booleans when interacting with the client
   - Example of response body: `{"task_id":1,"task_description":"baz","task_notes":null,"task_completed":false,"project_id:1}`
 
-- [ ] `[GET] /api/tasks`
+- [x] `[GET] /api/tasks`
   - Even though `task_completed` is stored as an integer, the API uses booleans when interacting with the client
   - Each task must include `project_name` and `project_description`
   - Example of response body: `[{"task_id":1,"task_description":"baz","task_notes":null,"task_completed":false,"project_name:"bar","project_description":null}]`
@@ -101,16 +106,27 @@ Build an API inside the `api` folder with endpoints for:
 
 ## Submission format
 
-- [X] Submit via Codegrade by pushing commits to your `main` branch on Github.
-- [X] Check Codegrade before the deadline to compare its results against your local tests.
-- [X] Check Codegrade on the days following the Sprint Challenge for reviewer feedback.
-- [X] New commits will be evaluated by Codegrade if pushed _before_ the sprint challenge deadline.
+- [x] Submit via Codegrade by pushing commits to your `main` branch on Github.
+- [x] Check Codegrade before the deadline to compare its results against your local tests.
+- [x] Check Codegrade on the days following the Sprint Challenge for reviewer feedback.
+- [x] New commits will be evaluated by Codegrade if pushed _before_ the sprint challenge deadline.
 
 ## Interview Questions
 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. Explain the difference between Relational Databases and SQL.
+
+- A Relational Database is data with defined relationships between each individual piece of data. This is represented as tables with columns and rows. SQL Databases are actually a type of relational database, as they are also table-based structures with strict pre-defined schemas. Non-relational databases don't use tables, in favor of storage models optimized for their specific requirements.
+
 2. Why do tables need a Primary Key?
+
+- Primary Keys serve as unique identifiers for the data on that line. They are used any time you need to reference data on that line, through other tables (using that primary key as a foreign key) or otherwise.
+
 3. What is the name given to a table column that references the Primary Key on another table?
+
+- Foreign Key
+
 4. What do we need in order to have a _many to many_ relationship between two tables?
+
+- You will need an additional, intermediary table in order to maintain many-to-many relationships between their data, while maintaining best practices.
