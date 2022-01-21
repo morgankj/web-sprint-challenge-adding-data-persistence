@@ -2,7 +2,16 @@
 const db = require("../../data/dbConfig");
 
 async function getAllTasks() {
-  let tasks = await db("tasks");
+  let tasks = await db("tasks as t")
+    .leftJoin("projects as p", "p.project_id", "t.project_id")
+    .select(
+      "t.task_id",
+      "t.task_description",
+      "t.task_notes",
+      "t.task_completed",
+      "p.project_name",
+      "p.project_description"
+    );
   tasks.forEach((task) => {
     task.task_completed === 0 || !task.task_completed
       ? (task.task_completed = false)
@@ -26,6 +35,6 @@ async function createTask(task) {
 }
 
 module.exports = {
-    getAllTasks,
-    createTask
+  getAllTasks,
+  createTask,
 };
