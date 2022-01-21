@@ -1,12 +1,23 @@
 // build your `Project` model here
 const db = require("../../data/dbConfig");
 
-function getAllProjects() {
-  return db("projects");
+async function getAllProjects() {
+  let projects = await db("projects");
+  projects.forEach(project => {
+    project.project_completed === 0 || !project.project_completed
+    ? (project.project_completed = false)
+    : (project.project_completed = true)
+  });
+  console.log(projects);
+  return projects;
 }
 
-function getProjectById(id) {
-  return db("projects").where("project_id", id).first();
+async function getProjectById(id) {
+  let project = await db("projects").where("project_id", id).first();
+project.project_completed === 0 || !project.project_completed
+    ? (project.project_completed = false)
+    : (project.project_completed = true);
+  return project;
 }
 
 async function createProject(project) {
